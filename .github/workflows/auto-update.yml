@@ -1,0 +1,47 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: GitHub CI - Auto dependency update
+
+on:
+  push:
+    branches:
+      - development
+  schedule:
+    - cron: '0 * * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Configure NPM
+        run: |
+          npm config set @dipa-projekt:registry https://npm.pkg.github.com
+          npm config set '//npm.pkg.github.com/:_authToken' ${{ secrets.GITHUB_TOKEN }}
+      - name: Delete branch if exists
+        run: |
+          try {
+            git push origin --delete auto/dependency-update
+          } catch (error) {}
+      - name: Create branch
+        run: git checkout -b auto/dependency-update
+      - name: Install
+        run: npm ci
+      - name: Update
+        run: npm update
+      - name: Outdated
+        run: npm outdated
+      - name: Git actions
+        run: |
+          git add package.json package-lock.json
+          git commit -m "Auto dependency update"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
