@@ -1,0 +1,45 @@
+{
+  "name": "@dipa-projekt/hub-client",
+  "version": "0.1.0",
+  "description": "",
+  "scripts": {
+    "build": "preact build --gzip",
+    "coverage": "preact coverage",
+    "e2e": "preact e2e -e chrome",
+    "reinstall": "npm run remove && npm run update",
+    "remove": "rm -rf node_modules package-lock.json",
+    "serve": "preact serve",
+    "start": "npm run serve -- --open",
+    "test": "preact test",
+    "update": "npm install && npm update"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "{src,tests}/**/*.{html,js,json,jsx,ts,tsx,gql,graphql}": [
+      "eslint"
+    ],
+    "{src,tests}/**": [
+      "prettier"
+    ]
+  },
+  "dependencies": {
+    "@dipa-projekt/hub-openapi": "^0.1.8",
+    "@leanup/form": "^1.0.17",
+    "@leanup/lib": "^1.0.17",
+    "navigo": "^7.1.2",
+    "preact": "^10.5.3"
+  },
+  "devDependencies": {
+    "@leanup/cli": "^1.0.17",
+    "@leanup/cli-addons": "^1.0.17",
+    "@leanup/cli-preact": "^1.0.17",
+    "@leanup/cli-vanilla": "^1.0.17",
+    "@leanup/git-hooks": "^1.0.17",
+    "typescript": "^4.0.3"
+  }
+}
