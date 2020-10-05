@@ -29,17 +29,17 @@
   },
   "dependencies": {
     "@dipa-projekt/hub-openapi": "^0.1.8",
-    "@leanup/form": "^1.0.17",
-    "@leanup/lib": "^1.0.17",
+    "@leanup/form": "^1.0.18",
+    "@leanup/lib": "^1.0.18",
     "navigo": "^7.1.2",
     "preact": "^10.5.3"
   },
   "devDependencies": {
-    "@leanup/cli": "^1.0.17",
-    "@leanup/cli-addons": "^1.0.17",
-    "@leanup/cli-preact": "^1.0.17",
-    "@leanup/cli-vanilla": "^1.0.17",
-    "@leanup/git-hooks": "^1.0.17",
+    "@leanup/cli": "^1.0.23",
+    "@leanup/cli-addons": "^1.0.23",
+    "@leanup/cli-preact": "^1.0.23",
+    "@leanup/cli-vanilla": "^1.0.23",
+    "@leanup/git-hooks": "^1.0.18",
     "typescript": "^4.0.3"
   }
 }

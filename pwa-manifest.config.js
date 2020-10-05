@@ -12,14 +12,14 @@ module.exports = {
   filename: 'manifest.json',
   icons: [
     {
-      src: path.resolve('public/assets/pwa.icon.png'),
-      sizes: [96, 128, 192, 256, 384, 512]
-    }
+      src: path.resolve('public/assets//dipa.logo.jpg'),
+      sizes: [96, 128, 192, 256, 384, 512],
+    },
   ],
   crossorigin: null,
   inject: true,
   fingerprints: false,
   ios: false,
   publicPath: null,
-  includeDirectory: true
+  includeDirectory: true,
 };

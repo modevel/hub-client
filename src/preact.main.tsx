@@ -21,6 +21,5 @@ require('./shares/routing');
 
 const htmlDivElement: HTMLDivElement | null = document.querySelector('div#app');
 if (htmlDivElement instanceof HTMLDivElement) {
-  htmlDivElement.style.display = 'inline';
   render(<AppComponent />, htmlDivElement);
 }

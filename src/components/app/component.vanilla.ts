@@ -2,12 +2,12 @@ import '../series/create/component.vanilla';
 import '../series/list/component.vanilla';
 
 import { RouterService } from '../../services/router/service';
+import { Filters } from '../../shares/filters';
 import { VanillaComponent } from '../component.vanilla';
 import { AppController } from './controller';
-import { Filters } from '../../shares/filters';
 
 function render(component: AppComponent) {
-  let html = `<h2>Hello World.</h2><div id="app">
+  let html = `<div id="app">
   <code>- is currently not full implemented -</code>
   <h4>${component.$ctrl.framework.name}</h4>
   <small>${component.$ctrl.finishedRendering} ms upcomming time</small>`;
@@ -21,7 +21,8 @@ function render(component: AppComponent) {
   html += `<!-- small>${component.counter} s ticks</small -->
   <small>Used filters: ${Filters.date(component.$ctrl.dummies.date)} | ${Filters.currency(
     component.$ctrl.dummies.price
-  )} €</small>
+  )} €</small><br />
+  <small>Build with: ${component.$ctrl.cli.name} v${component.$ctrl.cli.version}}</small>
   </div>`;
   return html;
 }

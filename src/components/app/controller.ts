@@ -2,13 +2,9 @@ import { Status, StatusApi } from '@dipa-projekt/hub-openapi';
 import { AbstractController } from '@leanup/lib/components/generic';
 import { DI } from '@leanup/lib/helpers/injector';
 
+import { Framework } from '../../models/framework.interface';
 import { RouterService } from '../../services/router/service';
-import { STARTUP_TIMESTAMP } from '../../shares/constant';
-
-interface Framework {
-  name: string;
-  version: string;
-}
+import { CLI_DETAILS, STARTUP_TIMESTAMP } from '../../shares/constant';
 
 export interface Props {
   test: string;
@@ -38,6 +34,7 @@ export class AppController extends AbstractController {
     date: new Date(2010, 3, 5),
     price: 123123123,
   };
+  public readonly cli: Framework = CLI_DETAILS;
 
   public constructor() {
     super();
