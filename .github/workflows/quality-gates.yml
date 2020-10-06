@@ -6,15 +6,12 @@ name: GitHub CI - Quality gates
 on:
   push:
     branches:
-      - auto/*
       - feature/*
-      - fix/*
-      - development
-      - master
   pull_request:
     branches:
       - development
       - master
+      - release/*
 
 jobs:
   build:
@@ -29,14 +26,14 @@ jobs:
       - name: Configure NPM
         run: |
           npm config set @dipa-projekt:registry https://npm.pkg.github.com
-          npm config set '//npm.pkg.github.com/:_authToken' ${{ secrets.GITHUB_TOKEN }}
+          npm config set '//npm.pkg.github.com/:_authToken' ${{ secrets.NPMJS_GITHUB_PACKAGES_TOKEN }}
       - name: Install
         run: npm ci
       - name: Coverage
-        run: npx lean coverage
+        run: npx lean coverage --check-coverage
       - name: Format
         run: npx lean format
       - name: Lint
         run: npx lean lint
       - name: Build
-        run: npm run build
+        run: npx lean build --gzip

@@ -1,21 +1,27 @@
 # This workflow will build a Java project with Maven
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: GitHub CI - Auto dependency update
+name: Auto dependency update (v0.1)
 
 on:
-  push:
-    branches:
-      - development
+  workflow_dispatch:
   schedule:
-    - cron: '0 * * * *'
+    - cron: "0 2 * * *"
+
+env:
+  branch: release/0.1
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout specific branch
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          ref: ${{ env.branch }}
       - name: Set up Node.js 12.x
         uses: actions/setup-node@v1
         with:
@@ -23,25 +29,20 @@ jobs:
       - name: Configure NPM
         run: |
           npm config set @dipa-projekt:registry https://npm.pkg.github.com
-          npm config set '//npm.pkg.github.com/:_authToken' ${{ secrets.GITHUB_TOKEN }}
-      - name: Delete branch if exists
+          npm config set '//npm.pkg.github.com/:_authToken' ${{ secrets.NPMJS_GITHUB_PACKAGES_TOKEN }}
+      - name: Install and update dependencies
         run: |
-          try {
-            git push origin --delete auto/dependency-update
-          } catch (error) {}
-      - name: Create branch
-        run: git checkout -b auto/dependency-update
-      - name: Install
-        run: npm ci
-      - name: Update
-        run: npm update
-      - name: Outdated
-        run: npm outdated
-      - name: Git actions
+          npm install
+          npm update
+      - name: Commit changed files
         run: |
-          git add package.json package-lock.json
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git status
           git commit -m "Auto dependency update"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.branch }}
