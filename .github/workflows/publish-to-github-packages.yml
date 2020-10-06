@@ -1,0 +1,34 @@
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: GitHub CI - Publish to GitHub packages (NPM)
+
+on:
+  workflow_dispatch:
+  release:
+    types:
+      - published
+
+env:
+  tag: webpack
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Configure NPM
+        run: |
+          npm config set @dipa-projekt:registry https://npm.pkg.github.com
+          npm config set '//npm.pkg.github.com/:_authToken' ${{ secrets.NPMJS_GITHUB_PACKAGES_TOKEN }}
+      - name: Install and publish only @leanup/cli-core-e2e
+        run: |
+          npm ci
+          npx lean build --gzip
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
