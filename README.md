@@ -12,7 +12,7 @@
 
 ## Installation der Abhängigkeiten
 
-> Um alle Abhängigkeiten installieren zu können, muss für das OpenAPI-Modul ein GitHub-Auth-Token für NPM konfiguriert werden. Siehe dazu https://github.com/DiPA-Projekt/hub-openapi#npm-konfiguration
+> :bulb: Um alle Abhängigkeiten installieren zu können, muss für das OpenAPI-Modul ein GitHub-Auth-Token für NPM konfiguriert werden. Siehe dazu https://github.com/DiPA-Projekt/hub-openapi#npm-konfiguration
 
 Die Abhängigkeiten werden mittels folgenden Befehl installiert: `npm i`
 
@@ -38,4 +38,4 @@ Die Unit-Tests mit anschließenden Coverage-Bericht werden mittels folgenden Bef
 
 ## E2E-Tests
 
-Die E2"-Tests werden mittels folgenden Befehl ausgeführt: `npm e2e`
+Die E2E-Tests werden mittels folgenden Befehl ausgeführt: `npm e2e`
