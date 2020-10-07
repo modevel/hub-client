@@ -12,6 +12,8 @@
 
 ## Installation der Abhängigkeiten
 
+> Um alle Abhängigkeiten installieren zu können, muss für das OpenAPI-Modul ein GitHub-Auth-Token für NPM konfiguriert werden. Siehe dazu https://github.com/DiPA-Projekt/hub-openapi#npm-konfiguration
+
 Die Abhängigkeiten werden mittels folgenden Befehl installiert: `npm i`
 
 ## Aktualisieren der Abhängigkeiten
